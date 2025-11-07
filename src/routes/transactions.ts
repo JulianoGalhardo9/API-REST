@@ -6,6 +6,29 @@ import { randomUUID } from "crypto";
 // Request Body: De onde vem as informações que servem para criar ou modificar um recurso
 
 export async function transactionsRoutes(app: FastifyInstance) {
+
+  app.get('/', async () => {
+    const transactions = await knex ('transactions').select()
+
+    return {
+      transactions,
+    }
+  })
+
+  // http://localhost:3333/transactions/O id do usuário
+
+  app.get('/:id', async (request) => {
+    const getTransactionParamsSchema = z.object({
+      id: z.uuid(),
+    })
+
+    const { id } = getTransactionParamsSchema.parse(request.params)
+
+    const transaction = await knex('transactions').where('id', id).first()
+
+    return { transaction }
+  })
+
   app.post("/", async (request, reply) => {
 
     const createTransactionBodySchema = z.object({
@@ -22,7 +45,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
         id: randomUUID(),
         title,
         amount: type === 'credit' ? amount : amount * -1,
-        
+
     })
 
     // Query Builders
