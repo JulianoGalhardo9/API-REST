@@ -9,6 +9,7 @@ import { checkSessionIdExists } from "../middlewares/check-session-id-exists.js"
 // Cookies -> Formas de manter contexto entre requisições (Salva seu id para conseguir validar se a mesma pessoa fez tais requisições) = meio que já salvar o usuário
 
 export async function transactionsRoutes(app: FastifyInstance) {
+
   app.get(
     "/",
     {

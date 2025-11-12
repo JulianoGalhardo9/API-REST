@@ -10,6 +10,11 @@ app.register(cookie, {
   secret: "uma_chave_secreta_segura",
   hook: "onRequest",
 });
+
+app.addHook("preHandler", async (request) => {
+  console.log(`[${request.method}] ${request.url}`);
+});
+
 app.register(transactionsRoutes, {
   prefix: "transactions",
 });
