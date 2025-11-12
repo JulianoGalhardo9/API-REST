@@ -1,23 +1,5 @@
-import fastify from "fastify";
-import cookie from "@fastify/cookie";
-
+import { app } from './app.js'
 import { env } from "./env/index.js";
-import { transactionsRoutes } from "./routes/transactions.js";
-
-const app = fastify();
-
-app.register(cookie, {
-  secret: "uma_chave_secreta_segura",
-  hook: "onRequest",
-});
-
-app.addHook("preHandler", async (request) => {
-  console.log(`[${request.method}] ${request.url}`);
-});
-
-app.register(transactionsRoutes, {
-  prefix: "transactions",
-});
 
 app
   .listen({
@@ -26,3 +8,5 @@ app
   .then(() => {
     console.log("HTTP Server is Running!");
   });
+export { app };
+
