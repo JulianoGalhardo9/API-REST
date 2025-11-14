@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     // File Layout
-    "rootDir": "./src",
-    "outDir": "./build",
+    //"rootDir": "./src",
+    //"outDir": "./build",
 
     // Environment Settings
     "module": "NodeNext",
